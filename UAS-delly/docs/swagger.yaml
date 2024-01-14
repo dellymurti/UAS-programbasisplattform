@@ -1,0 +1,95 @@
+swagger: "2.0"
+info:
+  title: "Your API Title"
+  version: "1.0"
+  description: "Your API description"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /api/login:
+    post:
+      summary: "Login API"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "Successful login"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "object"
+                # Define the structure of the login response data here
+        # Add more response codes and descriptions as needed
+  /api/produk:
+    get:
+      summary: "Get list of products"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Produk"
+        # Add more response codes and descriptions as needed
+    post:
+      summary: "Create a new product"
+      responses:
+        201:
+          description: "Successfully created"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "string"
+              data:
+                $ref: "#/definitions/Produk"
+        # Add more response codes and descriptions as needed
+    # Add other CRUD operations as needed
+  /api/user:
+    # Similar structure as /api/produk
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      email:
+        type: "string"
+  Produk:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
+ 
